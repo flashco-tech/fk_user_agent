@@ -1,34 +1,93 @@
+//group 'io.flutterfastkit.fk_user_agent'
+//version '2.0.0'
+//
+//buildscript {
+//    repositories {
+//        google()
+//        jcenter()
+//    }
+//
+//    dependencies {
+//        classpath 'com.android.tools.build:gradle:3.5.4'
+//    }
+//}
+//
+//rootProject.allprojects {
+//    repositories {
+//        google()
+//        jcenter()
+//    }
+//}
+//
+//apply plugin: 'com.android.library'
+//
+//android {
+//    compileSdkVersion 30
+//
+//    defaultConfig {
+//        minSdkVersion 16
+//    }
+//
+//    lintOptions {
+//        disable 'InvalidPackage'
+//    }
+//}
+
+
 group 'io.flutterfastkit.fk_user_agent'
-version '2.0.0'
+version '1.0-SNAPSHOT'
 
 buildscript {
+    ext.kotlin_version = '1.8.21' // You can update to 1.9.0 for latest compatibility
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
-
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.4'
+        // Updated Android Gradle Plugin to a newer version
+        classpath 'com.android.tools.build:gradle:8.1.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
 rootProject.allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 30
+    namespace "com.azukisiromochi.gradient_like_css" // Required for newer AGP versions
+    compileSdkVersion 34
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 21
+        targetSdkVersion 34
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
     }
 
     lintOptions {
         disable 'InvalidPackage'
     }
+
+    kotlinOptions {
+        jvmTarget = "1.8" // Ensures compatibility with Java 1.8
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
